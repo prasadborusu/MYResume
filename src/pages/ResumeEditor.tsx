@@ -248,7 +248,7 @@ export const ResumeEditor: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#09090B] text-zinc-100 flex flex-col">
       {/* Editor Top Navigation Bar */}
-      <header className="sticky top-0 z-40 bg-[#0F0F12] border-b border-zinc-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 shadow-md">
+      <header className="sticky top-0 z-40 bg-[#0F0F12] border-b border-zinc-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 shadow-md no-print">
         {/* Left: Back & Title Edit */}
         <div className="flex items-center gap-3 min-w-0">
           <Link
@@ -374,7 +374,7 @@ export const ResumeEditor: React.FC = () => {
       </header>
 
       {/* Mobile Toggle Tabs */}
-      <div className="lg:hidden flex border-b border-zinc-800 bg-[#0F0F12]">
+      <div className="lg:hidden flex border-b border-zinc-800 bg-[#0F0F12] no-print">
         <button
           onClick={() => setActiveTabMobile('editor')}
           className={`flex-1 py-2.5 text-xs font-semibold border-b-2 text-center transition-colors ${
@@ -401,7 +401,7 @@ export const ResumeEditor: React.FC = () => {
       <div className="flex-1 flex overflow-hidden">
         {/* LEFT COLUMN: Section Nav & Form Editor */}
         <div
-          className={`w-full lg:w-1/2 xl:w-[48%] flex flex-col border-r border-zinc-800 bg-[#09090B] overflow-y-auto ${
+          className={`w-full lg:w-1/2 xl:w-[48%] flex flex-col border-r border-zinc-800 bg-[#09090B] overflow-y-auto no-print ${
             activeTabMobile === 'preview' ? 'hidden lg:flex' : 'flex'
           }`}
         >
@@ -578,18 +578,18 @@ export const ResumeEditor: React.FC = () => {
 
         {/* RIGHT COLUMN: Live A4 Resume Preview */}
         <div
-          className={`flex-1 bg-[#0F0F12] overflow-y-auto p-4 sm:p-8 flex justify-center items-start ${
+          className={`flex-1 bg-[#0F0F12] overflow-y-auto p-4 sm:p-8 flex justify-center items-start print:p-0 print:m-0 print:bg-white print:overflow-visible print:block print:w-full ${
             activeTabMobile === 'editor' ? 'hidden lg:flex' : 'flex'
           }`}
         >
           {/* Zoomable Container with A4 Page Boundaries */}
           <div
-            className="transition-transform duration-200 origin-top shadow-2xl"
+            className="transition-transform duration-200 origin-top shadow-2xl print:shadow-none print:transform-none"
             style={{ transform: `scale(${zoomLevel})` }}
           >
             <div
               id="resume-preview-document"
-              className="w-[210mm] min-h-[297mm] bg-white text-black shadow-2xl rounded-sm overflow-hidden"
+              className="w-[210mm] min-h-[297mm] bg-white text-black shadow-2xl rounded-sm overflow-hidden box-border print:shadow-none print:overflow-visible"
             >
               <TemplateRenderer
                 templateId={templateId}

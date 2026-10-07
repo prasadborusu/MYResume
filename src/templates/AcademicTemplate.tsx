@@ -25,7 +25,7 @@ export const AcademicTemplate: React.FC<TemplateProps> = ({ data }) => {
   ].filter(Boolean);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-serif p-8 md:p-10 leading-relaxed text-[12.5px] print:p-0 print:text-[11.5px] min-h-[1123px] box-border">
+    <div className="w-full bg-white text-zinc-900 font-serif p-10 leading-relaxed text-[12.5px] min-h-[297mm] box-border">
       {/* Header */}
       <header className="border-b-2 border-indigo-900 pb-3 mb-4">
         <h1 className="text-2xl font-bold tracking-tight text-indigo-950 uppercase font-serif">

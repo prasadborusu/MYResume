@@ -18,10 +18,10 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
   }, {} as Record<string, string[]>);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-relaxed text-[13px] print:p-0 print:text-[12px] min-h-[1123px] box-border">
+    <div className="w-full bg-white text-zinc-900 font-sans p-10 leading-relaxed text-[13px] min-h-[297mm] box-border">
       {/* Header Banner */}
       <header className="border-b-2 border-zinc-900 pb-4 mb-4">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 uppercase">
+        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 uppercase">
           {personal.fullName || 'Your Full Name'}
         </h1>
         {personal.jobTitle && (
@@ -213,7 +213,7 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
               </h2>
               <div className="h-[1px] w-full bg-zinc-300 mt-1" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1 text-xs">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
               {Object.entries(groupedSkills).map(([cat, items]) => (
                 <div key={cat} className="flex items-baseline gap-1">
                   <span className="font-semibold text-zinc-800 shrink-0">{cat}:</span>
@@ -226,7 +226,7 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
 
         {/* Certifications & Achievements in 2 columns */}
         {((certifications && certifications.length > 0) || (achievements && achievements.length > 0) || (languages && languages.length > 0)) && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+          <div className="grid grid-cols-2 gap-4 pt-1">
             {certifications && certifications.length > 0 && (
               <section>
                 <div className="mb-2">

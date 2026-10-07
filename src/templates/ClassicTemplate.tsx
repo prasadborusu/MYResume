@@ -25,7 +25,7 @@ export const ClassicTemplate: React.FC<TemplateProps> = ({ data }) => {
   ].filter(Boolean);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-serif p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[12px] min-h-[1123px] box-border">
+    <div className="w-full bg-white text-zinc-900 font-serif p-10 leading-normal text-[12.5px] min-h-[297mm] box-border">
       {/* Centered Classic Header */}
       <header className="text-center pb-3 mb-4 border-b-2 border-zinc-800">
         <h1 className="text-2xl font-bold tracking-wide text-zinc-950 uppercase font-serif">

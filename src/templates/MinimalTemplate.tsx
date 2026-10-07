@@ -25,7 +25,7 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({ data }) => {
   ].filter(Boolean);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[12px] min-h-[1123px] box-border">
+    <div className="w-full bg-white text-zinc-900 font-sans p-10 leading-normal text-[12.5px] min-h-[297mm] box-border">
       {/* Header */}
       <header className="text-center pb-3 mb-3 border-b border-zinc-300">
         <h1 className="text-2xl font-bold tracking-normal text-zinc-950">

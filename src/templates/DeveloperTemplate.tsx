@@ -18,7 +18,7 @@ export const DeveloperTemplate: React.FC<TemplateProps> = ({ data }) => {
   }, {} as Record<string, string[]>);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[11.5px] min-h-[1123px] box-border">
+    <div className="w-full bg-white text-zinc-900 font-sans p-10 leading-normal text-[12.5px] min-h-[297mm] box-border">
       {/* Developer Header */}
       <header className="border-b-2 border-zinc-800 pb-3 mb-4">
         <div className="flex justify-between items-start flex-wrap gap-2">
@@ -103,7 +103,7 @@ export const DeveloperTemplate: React.FC<TemplateProps> = ({ data }) => {
               </div>
               <div className="h-[1px] w-full bg-zinc-300 mt-1" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+            <div className="grid grid-cols-2 gap-2 text-xs">
               {Object.entries(groupedSkills).map(([cat, items]) => (
                 <div key={cat} className="p-2 bg-zinc-50 border border-zinc-200 rounded">
                   <span className="font-mono text-[11px] font-bold text-sky-800 block mb-1">
@@ -234,7 +234,7 @@ export const DeveloperTemplate: React.FC<TemplateProps> = ({ data }) => {
               </div>
               <div className="h-[1px] w-full bg-zinc-300 mt-1" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+            <div className="grid grid-cols-2 gap-2 text-xs">
               {certifications?.map((c) => (
                 <div key={c.id} className="text-zinc-700">
                   <span className="font-semibold text-zinc-900">{c.name}</span> — {c.issuer} ({c.date})

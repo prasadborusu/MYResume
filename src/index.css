@@ -29,37 +29,84 @@
   background: #3F3F46;
 }
 
-/* Print CSS optimization */
+/* Print CSS - Strict 1:1 Physical A4 Layout */
 @media print {
-  body {
-    background: #ffffff !important;
-    color: #000000 !important;
-    padding: 0 !important;
+  @page {
+    size: A4 portrait;
+    margin: 0;
   }
 
-  header, nav, aside, button, .no-print {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box !important;
+  }
+
+  html,
+  body {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide app chrome, toolbars, buttons, toast notifications, navigation */
+  header,
+  nav,
+  aside:not(#resume-preview-document aside):not(#full-resume-preview-document aside),
+  button,
+  .no-print {
     display: none !important;
   }
 
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    transform: none !important;
-  }
-
-  #resume-preview-document,
-  #full-resume-preview-document,
-  .resume-document {
-    box-shadow: none !important;
-    border: none !important;
-    width: 100% !important;
+  /* Reset outer application containers so they don't clip or scroll */
+  #root,
+  #root > div,
+  main {
+    overflow: visible !important;
+    display: block !important;
+    height: auto !important;
     min-height: auto !important;
     margin: 0 !important;
     padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    position: static !important;
   }
 
-  @page {
-    size: A4 portrait;
-    margin: 10mm;
+  /* Remove any interactive scale zoom wrapper */
+  [style*="transform"] {
+    transform: none !important;
+  }
+
+  /* The Resume Preview Documents */
+  #resume-preview-document,
+  #full-resume-preview-document,
+  .resume-document {
+    position: relative !important;
+    width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    transform: none !important;
+    overflow: visible !important;
+    background-color: #ffffff !important;
+    box-sizing: border-box !important;
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+
+  /* Prevent awkward page break cutting through sections */
+  section,
+  header {
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 }

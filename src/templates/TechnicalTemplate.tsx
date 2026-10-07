@@ -18,7 +18,7 @@ export const TechnicalTemplate: React.FC<TemplateProps> = ({ data }) => {
   }, {} as Record<string, string[]>);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[11.5px] min-h-[1123px] box-border">
+    <div className="w-full bg-white text-zinc-900 font-sans p-10 leading-normal text-[12.5px] min-h-[297mm] box-border">
       {/* Technical Header */}
       <header className="border-b-2 border-cyan-800 pb-3.5 mb-4">
         <div className="flex justify-between items-baseline flex-wrap gap-2">
@@ -112,7 +112,7 @@ export const TechnicalTemplate: React.FC<TemplateProps> = ({ data }) => {
               </h2>
               <div className="h-[1px] w-full bg-zinc-300 mt-1" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1 text-xs">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
               {Object.entries(groupedSkills).map(([cat, items]) => (
                 <div key={cat} className="flex items-baseline gap-1">
                   <span className="font-semibold text-zinc-900 shrink-0">{cat}:</span>
@@ -225,7 +225,7 @@ export const TechnicalTemplate: React.FC<TemplateProps> = ({ data }) => {
               </h2>
               <div className="h-[1px] w-full bg-zinc-300 mt-1" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-zinc-700">
+            <div className="grid grid-cols-2 gap-2 text-xs text-zinc-700">
               {certifications?.map((c) => (
                 <div key={c.id}>
                   <strong>{c.name}</strong> — {c.issuer} ({c.date})

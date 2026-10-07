@@ -25,10 +25,10 @@ export const ExecutiveTemplate: React.FC<TemplateProps> = ({ data }) => {
   ].filter(Boolean);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[11.5px] min-h-[1123px] box-border">
+    <div className="w-full bg-white text-zinc-900 font-sans p-10 leading-normal text-[12.5px] min-h-[297mm] box-border">
       {/* Executive Header */}
       <header className="border-b-4 border-slate-900 pb-3 mb-4">
-        <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-950 uppercase">
+        <h1 className="text-3xl font-extrabold tracking-tight text-slate-950 uppercase">
           {personal.fullName || 'Executive Leader'}
         </h1>
         {personal.jobTitle && (

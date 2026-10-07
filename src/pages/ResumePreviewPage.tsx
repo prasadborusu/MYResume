@@ -96,7 +96,7 @@ export const ResumePreviewPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#09090B] text-zinc-100 flex flex-col">
       {/* Top Header Bar */}
-      <header className="sticky top-0 z-40 bg-[#0F0F12] border-b border-zinc-800 px-4 py-3 flex flex-wrap items-center justify-between gap-3 shadow-md">
+      <header className="sticky top-0 z-40 bg-[#0F0F12] border-b border-zinc-800 px-4 py-3 flex flex-wrap items-center justify-between gap-3 shadow-md no-print">
         {/* Left: Back & Title */}
         <div className="flex items-center gap-3">
           <Link
@@ -182,14 +182,14 @@ export const ResumePreviewPage: React.FC = () => {
       </header>
 
       {/* Main Preview Workspace */}
-      <main className="flex-1 bg-[#09090B] p-4 sm:p-10 flex justify-center items-start overflow-y-auto">
+      <main className="flex-1 bg-[#09090B] p-4 sm:p-10 flex justify-center items-start overflow-y-auto print:p-0 print:m-0 print:bg-white print:overflow-visible print:block print:w-full">
         <div
-          className="transition-transform duration-200 origin-top shadow-2xl"
+          className="transition-transform duration-200 origin-top shadow-2xl print:shadow-none print:transform-none"
           style={{ transform: `scale(${zoomLevel})` }}
         >
           <div
             id="full-resume-preview-document"
-            className="w-[210mm] min-h-[297mm] bg-white text-black shadow-2xl rounded-sm overflow-hidden"
+            className="w-[210mm] min-h-[297mm] bg-white text-black shadow-2xl rounded-sm overflow-hidden box-border print:shadow-none print:overflow-visible"
           >
             <TemplateRenderer
               templateId={templateId}

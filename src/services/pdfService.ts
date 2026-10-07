@@ -15,6 +15,8 @@ export async function exportResumeToPdf({ elementId, fileName, fullName }: PdfEx
   }
 
   let stagingContainer: HTMLDivElement | null = null;
+  const originalScrollX = window.scrollX;
+  const originalScrollY = window.scrollY;
 
   try {
     // 1. Ensure all custom web fonts are fully ready
@@ -23,31 +25,30 @@ export async function exportResumeToPdf({ elementId, fileName, fullName }: PdfEx
     }
 
     // 2. Create an isolated staging container directly attached to document.body.
-    // Critical: width MUST be exactly 794px (standard 210mm at 96 DPI).
-    // Staging container is placed on top of everything (z-index 99999) during capture
-    // so html2canvas renders it without any stacking-context or dark background interference.
+    // Critical: width MUST be physical A4 210mm.
     stagingContainer = document.createElement('div');
     stagingContainer.id = 'pdf-isolated-staging-root';
     stagingContainer.style.position = 'fixed';
     stagingContainer.style.left = '0';
     stagingContainer.style.top = '0';
-    stagingContainer.style.width = '794px';
+    stagingContainer.style.width = '210mm';
+    stagingContainer.style.minHeight = '297mm';
     stagingContainer.style.zIndex = '99999';
     stagingContainer.style.overflow = 'visible';
     stagingContainer.style.backgroundColor = '#ffffff';
     stagingContainer.style.transform = 'none';
     stagingContainer.style.margin = '0';
     stagingContainer.style.padding = '0';
+    stagingContainer.style.boxSizing = 'border-box';
+    stagingContainer.style.pointerEvents = 'none';
 
-    // 3. Deep-clone the source resume element
+    // 3. Deep-clone the source resume element without any modifications to text or padding
     const clone = sourceElement.cloneNode(true) as HTMLElement;
     clone.id = 'pdf-isolated-staging-clone';
-    clone.style.width = '794px';
-    clone.style.minWidth = '794px';
-    clone.style.maxWidth = '794px';
+    clone.style.width = '210mm';
+    clone.style.minHeight = '297mm';
     clone.style.transform = 'none';
     clone.style.margin = '0';
-    clone.style.padding = '0';
     clone.style.boxShadow = 'none';
     clone.style.border = 'none';
     clone.style.borderRadius = '0';
@@ -55,44 +56,39 @@ export async function exportResumeToPdf({ elementId, fileName, fullName }: PdfEx
     clone.style.backgroundColor = '#ffffff';
     clone.style.overflow = 'visible';
 
-    // Normalize text rendering & disable ligatures to avoid font rendering glitches
-    const allTextNodes = clone.querySelectorAll<HTMLElement>('*');
-    allTextNodes.forEach((el) => {
-      el.style.letterSpacing = 'normal';
-      el.style.wordSpacing = 'normal';
-      el.style.fontVariantLigatures = 'none';
-      el.style.fontFeatureSettings = 'normal';
-      if (el.classList.contains('text-justify')) {
-        el.style.textAlign = 'left';
-      }
-    });
-
     stagingContainer.appendChild(clone);
     document.body.appendChild(stagingContainer);
 
-    // Wait 80ms for complete DOM paint and font layout recalculation
-    await new Promise((resolve) => setTimeout(resolve, 80));
+    // Wait for layout and font rendering
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
-    // Calculate actual rendered content height
-    const elementHeight = Math.max(clone.scrollHeight, clone.offsetHeight, 1123);
+    // Get exact rendered dimensions
+    const rect = clone.getBoundingClientRect();
+    const exactWidth = rect.width;
+    const exactHeight = Math.max(rect.height, clone.scrollHeight, clone.offsetHeight);
 
-    // 4. Capture at 1:1 windowWidth to prevent downscaling / margins bug
-    // scale: 3 gives true 300 DPI print quality (2382 x 3369 px)
+    // Temporarily reset scroll to eliminate coordinate offsets in html2canvas
+    window.scrollTo(0, 0);
+
+    // 4. Capture at 300 DPI (scale: 3) preserving exact dimensions and aspect ratio
     const canvas = await html2canvas(clone, {
-      scale: 3, // Ultra-sharp 300 DPI print quality
+      scale: 3,
       useCORS: true,
       allowTaint: true,
       logging: false,
       backgroundColor: '#ffffff',
-      width: 794,
-      windowWidth: 794, // MUST MATCH width (794px) to guarantee 1.0x scale (NO SHRINKAGE)
-      height: elementHeight,
-      windowHeight: elementHeight,
+      width: exactWidth,
+      height: exactHeight,
+      windowWidth: exactWidth,
+      windowHeight: exactHeight,
       x: 0,
       y: 0,
       scrollX: 0,
       scrollY: 0,
     });
+
+    // Restore scroll position
+    window.scrollTo(originalScrollX, originalScrollY);
 
     // 5. Clean up staging container immediately
     if (stagingContainer && document.body.contains(stagingContainer)) {
@@ -100,10 +96,10 @@ export async function exportResumeToPdf({ elementId, fileName, fullName }: PdfEx
       stagingContainer = null;
     }
 
-    // Use lossless PNG for crystal clear text (NO JPEG compression fuzziness)
+    // Use lossless PNG for crystal clear rendering
     const imgData = canvas.toDataURL('image/png');
 
-    // Standard A4 dimensions in millimeters
+    // Standard physical A4 dimensions in millimeters
     const pdfWidth = 210;
     const pdfHeight = 297;
 
@@ -120,12 +116,12 @@ export async function exportResumeToPdf({ elementId, fileName, fullName }: PdfEx
     // Render Page 1 edge-to-edge
     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, renderedImgHeight, undefined, 'FAST');
 
-    // Multi-page handling: only add subsequent page if remaining overflow is > 8mm
+    // Multi-page handling: add subsequent page only if content overflows by > 3mm
     let remainingHeight = renderedImgHeight - pdfHeight;
     let pageNum = 1;
 
-    while (remainingHeight > 8) {
-      pdf.addPage();
+    while (remainingHeight > 3) {
+      pdf.addPage('a4', 'portrait');
       const pageOffset = -(pageNum * pdfHeight);
       pdf.addImage(imgData, 'PNG', 0, pageOffset, pdfWidth, renderedImgHeight, undefined, 'FAST');
       remainingHeight -= pdfHeight;
@@ -144,6 +140,7 @@ export async function exportResumeToPdf({ elementId, fileName, fullName }: PdfEx
     console.error('Failed to export PDF:', error);
     return false;
   } finally {
+    window.scrollTo(originalScrollX, originalScrollY);
     if (stagingContainer && document.body.contains(stagingContainer)) {
       document.body.removeChild(stagingContainer);
     }

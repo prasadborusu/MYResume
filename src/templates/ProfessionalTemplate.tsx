@@ -18,11 +18,11 @@ export const ProfessionalTemplate: React.FC<TemplateProps> = ({ data }) => {
   }, {} as Record<string, string[]>);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-sans leading-relaxed text-[12.5px] print:text-[11.5px] min-h-[1123px] box-border flex flex-col md:flex-row">
+    <div className="w-full bg-white text-zinc-900 font-sans leading-relaxed text-[12.5px] min-h-[297mm] box-border flex flex-row">
       {/* Left Sidebar */}
-      <aside className="w-full md:w-[34%] bg-slate-900 text-slate-100 p-6 md:p-7 shrink-0 space-y-5 print:w-[32%] print:bg-slate-900 print:text-white">
+      <aside className="w-[34%] bg-slate-900 text-slate-100 p-7 shrink-0 space-y-5">
         <div>
-          <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white uppercase">
+          <h1 className="text-2xl font-bold tracking-tight text-white uppercase">
             {personal.fullName || 'Professional'}
           </h1>
           {personal.jobTitle && (
@@ -137,7 +137,7 @@ export const ProfessionalTemplate: React.FC<TemplateProps> = ({ data }) => {
       </aside>
 
       {/* Main Column */}
-      <main className="flex-1 p-6 md:p-8 space-y-4">
+      <main className="flex-1 p-8 space-y-4">
         {/* Career Objective */}
         {objective && (
           <section>
