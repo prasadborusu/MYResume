@@ -159,10 +159,11 @@ export const ResumePreviewPage: React.FC = () => {
 
           <button
             onClick={printResume}
-            className="p-2 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors"
-            title="Print Resume"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-200 hover:text-white text-xs font-medium transition-colors border border-zinc-700/80"
+            title="Save as 100% Vector PDF via browser print dialog"
           >
-            <Printer className="w-4 h-4" />
+            <Printer className="w-3.5 h-3.5 text-zinc-300" />
+            <span>Print / Vector PDF</span>
           </button>
 
           <button

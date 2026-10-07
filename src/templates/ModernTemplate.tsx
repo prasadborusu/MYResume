@@ -18,9 +18,9 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
   }, {} as Record<string, string[]>);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-relaxed text-[13px] print:p-0 print:text-[12px] min-h-[1050px]">
+    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-relaxed text-[13px] print:p-0 print:text-[12px] min-h-[1123px] box-border">
       {/* Header Banner */}
-      <header className="border-b-2 border-zinc-900 pb-5 mb-5">
+      <header className="border-b-2 border-zinc-900 pb-4 mb-4">
         <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 uppercase">
           {personal.fullName || 'Your Full Name'}
         </h1>
@@ -59,7 +59,7 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
           {personal.github && (
             <span className="flex items-center gap-1">
               <GithubIcon className="w-3.5 h-3.5 text-zinc-800" />
-              <span>{personal.github.replace(/^https?:\/\/(www\.)?/, '')}</span>
+              <span>{personal.github.replace(/^https?:\/\//, '')}</span>
             </span>
           )}
           {personal.portfolio && (
@@ -76,9 +76,12 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Career Objective */}
         {objective && (
           <section>
-            <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-1.5 pb-0.5 border-b border-zinc-300">
-              Career Objective
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider leading-none">
+                Career Objective
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <p className="text-zinc-700 whitespace-pre-line text-left leading-normal">
               {objective}
             </p>
@@ -88,9 +91,12 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Professional Summary */}
         {summary && (
           <section>
-            <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-1.5 pb-0.5 border-b border-zinc-300">
-              Professional Summary
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider leading-none">
+                Professional Summary
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <p className="text-zinc-700 whitespace-pre-line text-left leading-normal">
               {summary}
             </p>
@@ -100,9 +106,12 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Experience */}
         {experience && experience.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-2 pb-0.5 border-b border-zinc-300">
-              Work Experience
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider leading-none">
+                Work Experience
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <div className="space-y-3">
               {experience.map((exp) => (
                 <div key={exp.id}>
@@ -131,9 +140,12 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Projects */}
         {projects && projects.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-2 pb-0.5 border-b border-zinc-300">
-              Key Projects
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider leading-none">
+                Key Projects
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <div className="space-y-2.5">
               {projects.map((proj) => (
                 <div key={proj.id}>
@@ -168,9 +180,12 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Education */}
         {education && education.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-2 pb-0.5 border-b border-zinc-300">
-              Education
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider leading-none">
+                Education
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <div className="space-y-2">
               {education.map((edu) => (
                 <div key={edu.id} className="flex justify-between items-baseline flex-wrap gap-1">
@@ -192,9 +207,12 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Technical Skills */}
         {skills && skills.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-2 pb-0.5 border-b border-zinc-300">
-              Skills
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider leading-none">
+                Skills
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1 text-xs">
               {Object.entries(groupedSkills).map(([cat, items]) => (
                 <div key={cat} className="flex items-baseline gap-1">
@@ -211,9 +229,12 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
             {certifications && certifications.length > 0 && (
               <section>
-                <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-1.5 pb-0.5 border-b border-zinc-300">
-                  Certifications
-                </h2>
+                <div className="mb-2">
+                  <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider leading-none">
+                    Certifications
+                  </h2>
+                  <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+                </div>
                 <ul className="space-y-1 text-xs text-zinc-700">
                   {certifications.map((cert) => (
                     <li key={cert.id} className="flex justify-between">
@@ -227,9 +248,12 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
 
             {achievements && achievements.length > 0 && (
               <section>
-                <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-1.5 pb-0.5 border-b border-zinc-300">
-                  Key Achievements
-                </h2>
+                <div className="mb-2">
+                  <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider leading-none">
+                    Key Achievements
+                  </h2>
+                  <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+                </div>
                 <ul className="space-y-1 text-xs text-zinc-700">
                   {achievements.map((ach) => (
                     <li key={ach.id}>
@@ -243,9 +267,12 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
 
             {languages && languages.length > 0 && (
               <section className="col-span-full">
-                <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-1.5 pb-0.5 border-b border-zinc-300">
-                  Languages
-                </h2>
+                <div className="mb-2">
+                  <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider leading-none">
+                    Languages
+                  </h2>
+                  <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+                </div>
                 <div className="flex flex-wrap gap-4 text-xs text-zinc-700">
                   {languages.map((lang) => (
                     <span key={lang.id}>

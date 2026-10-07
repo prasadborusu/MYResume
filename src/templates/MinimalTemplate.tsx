@@ -25,9 +25,9 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({ data }) => {
   ].filter(Boolean);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[12px] min-h-[1050px]">
+    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[12px] min-h-[1123px] box-border">
       {/* Header */}
-      <header className="text-center pb-4 mb-4 border-b border-zinc-300">
+      <header className="text-center pb-3 mb-3 border-b border-zinc-300">
         <h1 className="text-2xl font-bold tracking-normal text-zinc-950">
           {personal.fullName || 'Your Full Name'}
         </h1>
@@ -50,9 +50,12 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Career Objective */}
         {objective && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-1.5">
-              Career Objective
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 leading-none">
+                Career Objective
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-200 mt-1" />
+            </div>
             <p className="text-zinc-700 leading-relaxed text-left">
               {objective}
             </p>
@@ -62,9 +65,12 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Professional Summary */}
         {summary && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-1.5">
-              Professional Summary
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 leading-none">
+                Professional Summary
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-200 mt-1" />
+            </div>
             <p className="text-zinc-700 leading-relaxed text-left">
               {summary}
             </p>
@@ -74,9 +80,12 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Education */}
         {education && education.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-2">
-              Education
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 leading-none">
+                Education
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-200 mt-1" />
+            </div>
             <div className="space-y-2">
               {education.map((edu) => (
                 <div key={edu.id} className="flex justify-between items-baseline flex-wrap">
@@ -98,9 +107,12 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Experience */}
         {experience && experience.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-2">
-              Experience
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 leading-none">
+                Experience
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-200 mt-1" />
+            </div>
             <div className="space-y-2.5">
               {experience.map((exp) => (
                 <div key={exp.id}>
@@ -116,7 +128,7 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({ data }) => {
                   {exp.description && (
                     <div className="text-zinc-700 mt-1 whitespace-pre-line space-y-0.5">
                       {exp.description.split('\n').map((line, i) => (
-                        <p key={i} className="leading-relaxed">{line}</p>
+                        <p key={i} className="leading-snug">{line}</p>
                       ))}
                     </div>
                   )}
@@ -129,9 +141,12 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Projects */}
         {projects && projects.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-2">
-              Projects
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 leading-none">
+                Projects
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-200 mt-1" />
+            </div>
             <div className="space-y-2.5">
               {projects.map((proj) => (
                 <div key={proj.id}>
@@ -160,9 +175,12 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Skills */}
         {skills && skills.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-1.5">
-              Technical Skills
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 leading-none">
+                Technical Skills
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-200 mt-1" />
+            </div>
             <div className="space-y-1 text-xs">
               {Object.entries(groupedSkills).map(([cat, items]) => (
                 <p key={cat} className="text-zinc-700">
@@ -176,9 +194,12 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Certifications & Achievements */}
         {((certifications && certifications.length > 0) || (achievements && achievements.length > 0)) && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-1.5">
-              Certifications & Honors
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 leading-none">
+                Certifications & Honors
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-200 mt-1" />
+            </div>
             <ul className="space-y-1 text-xs text-zinc-700">
               {certifications?.map((c) => (
                 <li key={c.id}>
@@ -197,9 +218,12 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Languages */}
         {languages && languages.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-1">
-              Languages
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 leading-none">
+                Languages
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-200 mt-1" />
+            </div>
             <p className="text-xs text-zinc-700">
               {languages.map((l) => `${l.language} (${l.proficiency})`).join(' • ')}
             </p>

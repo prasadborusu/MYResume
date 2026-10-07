@@ -16,43 +16,46 @@ export const ClassicTemplate: React.FC<TemplateProps> = ({ data }) => {
   }, {} as Record<string, string[]>);
 
   const contactItems = [
-    personal.location,
-    personal.phone,
     personal.email,
+    personal.phone,
+    personal.location,
     personal.linkedin ? personal.linkedin.replace(/^https?:\/\/(www\.)?/, '') : '',
     personal.portfolio ? personal.portfolio.replace(/^https?:\/\/(www\.)?/, '') : '',
     personal.github ? personal.github.replace(/^https?:\/\/(www\.)?/, '') : ''
   ].filter(Boolean);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-serif p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[12px] min-h-[1050px]">
+    <div className="w-full bg-white text-zinc-900 font-serif p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[12px] min-h-[1123px] box-border">
       {/* Centered Classic Header */}
       <header className="text-center pb-3 mb-4 border-b-2 border-zinc-800">
         <h1 className="text-2xl font-bold tracking-wide text-zinc-950 uppercase font-serif">
           {personal.fullName || 'Your Full Name'}
         </h1>
         {personal.jobTitle && (
-          <p className="text-xs italic text-zinc-700 mt-0.5 font-sans">
+          <p className="text-xs font-serif italic text-zinc-700 mt-0.5">
             {personal.jobTitle}
           </p>
         )}
-        <div className="flex flex-wrap justify-center gap-x-3 gap-y-0.5 mt-2 text-xs text-zinc-700 font-sans">
+        <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 mt-2 text-xs text-zinc-700">
           {contactItems.map((item, idx) => (
-            <React.Fragment key={idx}>
-              <span>{item}</span>
-              {idx < contactItems.length - 1 && <span className="text-zinc-400">|</span>}
-            </React.Fragment>
+            <span key={idx}>
+              {item}
+              {idx < contactItems.length - 1 && <span className="mx-1 text-zinc-400">|</span>}
+            </span>
           ))}
         </div>
       </header>
 
-      <div className="space-y-4 font-sans">
+      <div className="space-y-3.5">
         {/* Career Objective */}
         {objective && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif border-b border-zinc-400 pb-0.5 mb-1.5">
-              Career Objective
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif leading-none">
+                Career Objective
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-400 mt-1" />
+            </div>
             <p className="text-zinc-800 leading-relaxed text-left text-xs">
               {objective}
             </p>
@@ -62,9 +65,12 @@ export const ClassicTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Executive / Professional Summary */}
         {summary && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif border-b border-zinc-400 pb-0.5 mb-1.5">
-              Executive Summary
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif leading-none">
+                Executive Summary
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-400 mt-1" />
+            </div>
             <p className="text-zinc-800 leading-relaxed text-left text-xs">
               {summary}
             </p>
@@ -74,9 +80,12 @@ export const ClassicTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Experience */}
         {experience && experience.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif border-b border-zinc-400 pb-0.5 mb-2">
-              Professional Experience
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif leading-none">
+                Professional Experience
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-400 mt-1" />
+            </div>
             <div className="space-y-3">
               {experience.map((exp) => (
                 <div key={exp.id}>
@@ -105,9 +114,12 @@ export const ClassicTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Projects */}
         {projects && projects.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif border-b border-zinc-400 pb-0.5 mb-2">
-              Key Projects
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif leading-none">
+                Key Projects
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-400 mt-1" />
+            </div>
             <div className="space-y-2.5">
               {projects.map((proj) => (
                 <div key={proj.id}>
@@ -131,9 +143,12 @@ export const ClassicTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Education */}
         {education && education.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif border-b border-zinc-400 pb-0.5 mb-2">
-              Education
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif leading-none">
+                Education
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-400 mt-1" />
+            </div>
             <div className="space-y-2">
               {education.map((edu) => (
                 <div key={edu.id} className="flex justify-between items-baseline flex-wrap">
@@ -155,9 +170,12 @@ export const ClassicTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Technical & Core Skills */}
         {skills && skills.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif border-b border-zinc-400 pb-0.5 mb-1.5">
-              Skills & Expertise
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif leading-none">
+                Skills & Expertise
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-400 mt-1" />
+            </div>
             <div className="space-y-1 text-xs text-zinc-800">
               {Object.entries(groupedSkills).map(([cat, items]) => (
                 <p key={cat}>
@@ -171,9 +189,12 @@ export const ClassicTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Honors & Certifications */}
         {((certifications && certifications.length > 0) || (achievements && achievements.length > 0)) && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif border-b border-zinc-400 pb-0.5 mb-1.5">
-              Honors & Certifications
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif leading-none">
+                Honors & Certifications
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-400 mt-1" />
+            </div>
             <ul className="space-y-1 text-xs text-zinc-800 list-disc list-inside">
               {certifications?.map((c) => (
                 <li key={c.id}>
@@ -192,9 +213,12 @@ export const ClassicTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Languages */}
         {languages && languages.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif border-b border-zinc-400 pb-0.5 mb-1">
-              Languages
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-950 font-serif leading-none">
+                Languages
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-400 mt-1" />
+            </div>
             <p className="text-xs text-zinc-800">
               {languages.map((l) => `${l.language} (${l.proficiency})`).join(' • ')}
             </p>

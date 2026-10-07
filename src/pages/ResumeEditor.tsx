@@ -347,13 +347,14 @@ export const ResumeEditor: React.FC = () => {
             <Eye className="w-4 h-4" />
           </Link>
 
-          {/* Print */}
+          {/* Print / Vector PDF */}
           <button
             onClick={printResume}
-            className="hidden sm:inline-flex p-1.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors"
-            title="Print Resume"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-200 hover:text-white text-xs font-medium transition-colors border border-zinc-700/80"
+            title="Save as 100% Vector PDF via browser print dialog"
           >
-            <Printer className="w-4 h-4" />
+            <Printer className="w-3.5 h-3.5 text-zinc-300" />
+            <span>Print / Vector PDF</span>
           </button>
 
           {/* Download PDF CTA */}

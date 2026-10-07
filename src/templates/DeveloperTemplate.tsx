@@ -1,7 +1,7 @@
 import React from 'react';
 import { ResumeData } from '../types/resume';
-import { Terminal, Globe, Mail, Phone, MapPin, ExternalLink, Code } from 'lucide-react';
-import { GithubIcon } from '../components/ui/Icons';
+import { Terminal, Mail, Phone, MapPin, Globe, ExternalLink, Code } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from '../components/ui/Icons';
 
 interface TemplateProps {
   data: ResumeData;
@@ -11,59 +11,55 @@ export const DeveloperTemplate: React.FC<TemplateProps> = ({ data }) => {
   const { personal, summary, objective, education, skills, projects, experience, certifications, achievements, languages } = data;
 
   const groupedSkills = skills.reduce((acc, skill) => {
-    const cat = skill.category || 'Other Skills';
+    const cat = skill.category || 'Tech Stack';
     if (!acc[cat]) acc[cat] = [];
     acc[cat].push(skill.name);
     return acc;
   }, {} as Record<string, string[]>);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[11.5px] min-h-[1050px]">
+    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[11.5px] min-h-[1123px] box-border">
       {/* Developer Header */}
-      <header className="border-b-2 border-zinc-800 pb-4 mb-4">
+      <header className="border-b-2 border-zinc-800 pb-3 mb-4">
         <div className="flex justify-between items-start flex-wrap gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <Terminal className="w-5 h-5 text-sky-600 shrink-0" />
+              <Terminal className="w-5 h-5 text-sky-600" />
               <h1 className="text-2xl font-bold tracking-tight text-zinc-950 font-mono">
-                {personal.fullName || 'Developer_Name'}
+                {personal.fullName || 'dev_user'}
               </h1>
             </div>
             {personal.jobTitle && (
-              <p className="text-xs font-semibold text-sky-700 font-mono mt-0.5">
-                $ role: "{personal.jobTitle}"
+              <p className="text-xs font-mono font-medium text-sky-700 mt-0.5">
+                {`> ${personal.jobTitle}`}
               </p>
             )}
           </div>
 
-          {/* Contact Badges */}
-          <div className="flex flex-wrap gap-2 text-xs font-mono text-zinc-700">
-            {personal.email && (
-              <span className="flex items-center gap-1 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-300">
-                <Mail className="w-3 h-3 text-sky-600" /> {personal.email}
-              </span>
-            )}
-            {personal.phone && (
-              <span className="flex items-center gap-1 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-300">
-                <Phone className="w-3 h-3 text-sky-600" /> {personal.phone}
-              </span>
-            )}
-            {personal.location && (
-              <span className="flex items-center gap-1 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-300">
-                <MapPin className="w-3 h-3 text-sky-600" /> {personal.location}
-              </span>
-            )}
-            {personal.github && (
-              <span className="flex items-center gap-1 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-300 text-sky-800">
-                <GithubIcon className="w-3 h-3" /> {personal.github.replace(/^https?:\/\/(www\.)?/, '')}
-              </span>
-            )}
-            {personal.portfolio && (
-              <span className="flex items-center gap-1 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-300 text-sky-800">
-                <Globe className="w-3 h-3" /> {personal.portfolio.replace(/^https?:\/\/(www\.)?/, '')}
-              </span>
-            )}
+          <div className="text-right text-xs font-mono text-zinc-600 space-y-0.5">
+            {personal.location && <div className="flex items-center justify-end gap-1"><MapPin className="w-3 h-3 text-zinc-400" /> {personal.location}</div>}
+            {personal.email && <div className="flex items-center justify-end gap-1"><Mail className="w-3 h-3 text-zinc-400" /> {personal.email}</div>}
+            {personal.phone && <div className="flex items-center justify-end gap-1"><Phone className="w-3 h-3 text-zinc-400" /> {personal.phone}</div>}
           </div>
+        </div>
+
+        {/* Links bar */}
+        <div className="flex flex-wrap gap-3 mt-2 text-xs font-mono text-sky-700">
+          {personal.github && (
+            <span className="flex items-center gap-1">
+              <GithubIcon className="w-3 h-3 text-zinc-800" /> {personal.github.replace(/^https?:\/\//, '')}
+            </span>
+          )}
+          {personal.linkedin && (
+            <span className="flex items-center gap-1">
+              <LinkedinIcon className="w-3 h-3 text-sky-700" /> {personal.linkedin.replace(/^https?:\/\//, '')}
+            </span>
+          )}
+          {personal.portfolio && (
+            <span className="flex items-center gap-1">
+              <Globe className="w-3 h-3 text-zinc-700" /> {personal.portfolio.replace(/^https?:\/\//, '')}
+            </span>
+          )}
         </div>
       </header>
 
@@ -71,8 +67,11 @@ export const DeveloperTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Objective */}
         {objective && (
           <section>
-            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 border-b border-zinc-300 pb-0.5 mb-1.5 uppercase">
-              <span className="text-zinc-500">//</span> 01. Career Objective
+            <div className="mb-1.5">
+              <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 uppercase leading-snug">
+                <span className="text-zinc-500">//</span> 01. Career Objective
+              </div>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
             </div>
             <p className="text-zinc-700 text-xs leading-relaxed text-left">
               {objective}
@@ -83,8 +82,11 @@ export const DeveloperTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Summary */}
         {summary && (
           <section>
-            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 border-b border-zinc-300 pb-0.5 mb-1.5 uppercase">
-              <span className="text-zinc-500">//</span> 02. Professional Overview
+            <div className="mb-1.5">
+              <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 uppercase leading-snug">
+                <span className="text-zinc-500">//</span> 02. Professional Overview
+              </div>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
             </div>
             <p className="text-zinc-700 text-xs leading-relaxed text-left">
               {summary}
@@ -95,8 +97,11 @@ export const DeveloperTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Technical Stack / Skills Matrix */}
         {skills && skills.length > 0 && (
           <section>
-            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 border-b border-zinc-300 pb-0.5 mb-2 uppercase">
-              <span className="text-sky-600">//</span> 02. Technical Skills Matrix
+            <div className="mb-1.5">
+              <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 uppercase leading-snug">
+                <span className="text-sky-600">//</span> 03. Technical Skills Matrix
+              </div>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
               {Object.entries(groupedSkills).map(([cat, items]) => (
@@ -120,8 +125,11 @@ export const DeveloperTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Projects (Tech Showcase) */}
         {projects && projects.length > 0 && (
           <section>
-            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 border-b border-zinc-300 pb-0.5 mb-2 uppercase">
-              <span className="text-sky-600">//</span> 03. Featured Projects
+            <div className="mb-2">
+              <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 uppercase leading-snug">
+                <span className="text-sky-600">//</span> 04. Featured Projects
+              </div>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
             </div>
             <div className="space-y-3">
               {projects.map((proj) => (
@@ -166,8 +174,11 @@ export const DeveloperTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Experience */}
         {experience && experience.length > 0 && (
           <section>
-            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 border-b border-zinc-300 pb-0.5 mb-2 uppercase">
-              <span className="text-sky-600">//</span> 04. Work Experience
+            <div className="mb-2">
+              <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 uppercase leading-snug">
+                <span className="text-sky-600">//</span> 05. Work Experience
+              </div>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
             </div>
             <div className="space-y-3">
               {experience.map((exp) => (
@@ -194,8 +205,11 @@ export const DeveloperTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Education */}
         {education && education.length > 0 && (
           <section>
-            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 border-b border-zinc-300 pb-0.5 mb-2 uppercase">
-              <span className="text-sky-600">//</span> 05. Education
+            <div className="mb-2">
+              <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 uppercase leading-snug">
+                <span className="text-sky-600">//</span> 06. Education
+              </div>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
             </div>
             <div className="space-y-2">
               {education.map((edu) => (
@@ -214,8 +228,11 @@ export const DeveloperTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Certifications & Languages */}
         {((certifications && certifications.length > 0) || (achievements && achievements.length > 0) || (languages && languages.length > 0)) && (
           <section>
-            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 border-b border-zinc-300 pb-0.5 mb-1.5 uppercase">
-              <span className="text-sky-600">//</span> 06. Credentials & Extras
+            <div className="mb-1.5">
+              <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-900 uppercase leading-snug">
+                <span className="text-sky-600">//</span> 07. Credentials & Extras
+              </div>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
               {certifications?.map((c) => (

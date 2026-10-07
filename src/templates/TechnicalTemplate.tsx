@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResumeData } from '../types/resume';
-import { Mail, Phone, MapPin, Globe, Cpu } from 'lucide-react';
+import { Mail, Phone, MapPin, Globe } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../components/ui/Icons';
 
 interface TemplateProps {
@@ -11,14 +11,14 @@ export const TechnicalTemplate: React.FC<TemplateProps> = ({ data }) => {
   const { personal, summary, objective, education, skills, projects, experience, certifications, achievements, languages } = data;
 
   const groupedSkills = skills.reduce((acc, skill) => {
-    const cat = skill.category || 'Other Skills';
+    const cat = skill.category || 'Other Technical Skills';
     if (!acc[cat]) acc[cat] = [];
     acc[cat].push(skill.name);
     return acc;
   }, {} as Record<string, string[]>);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[11.5px] min-h-[1050px]">
+    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[11.5px] min-h-[1123px] box-border">
       {/* Technical Header */}
       <header className="border-b-2 border-cyan-800 pb-3.5 mb-4">
         <div className="flex justify-between items-baseline flex-wrap gap-2">
@@ -37,32 +37,32 @@ export const TechnicalTemplate: React.FC<TemplateProps> = ({ data }) => {
           <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-zinc-600">
             {personal.email && (
               <span className="flex items-center gap-1">
-                <Mail className="w-3 h-3 text-cyan-700" /> {personal.email}
+                <Mail className="w-3.5 h-3.5 text-cyan-700" /> {personal.email}
               </span>
             )}
             {personal.phone && (
               <span className="flex items-center gap-1">
-                <Phone className="w-3 h-3 text-cyan-700" /> {personal.phone}
+                <Phone className="w-3.5 h-3.5 text-cyan-700" /> {personal.phone}
               </span>
             )}
             {personal.location && (
               <span className="flex items-center gap-1">
-                <MapPin className="w-3 h-3 text-cyan-700" /> {personal.location}
+                <MapPin className="w-3.5 h-3.5 text-cyan-700" /> {personal.location}
               </span>
             )}
             {personal.linkedin && (
               <span className="flex items-center gap-1">
-                <LinkedinIcon className="w-3 h-3 text-cyan-700" /> {personal.linkedin.replace(/^https?:\/\/(www\.)?/, '')}
+                <LinkedinIcon className="w-3.5 h-3.5 text-cyan-700" /> {personal.linkedin.replace(/^https?:\/\/(www\.)?/, '')}
               </span>
             )}
             {personal.github && (
               <span className="flex items-center gap-1">
-                <GithubIcon className="w-3 h-3 text-cyan-700" /> {personal.github.replace(/^https?:\/\/(www\.)?/, '')}
+                <GithubIcon className="w-3.5 h-3.5 text-cyan-700" /> {personal.github.replace(/^https?:\/\/(www\.)?/, '')}
               </span>
             )}
             {personal.portfolio && (
               <span className="flex items-center gap-1">
-                <Globe className="w-3 h-3 text-cyan-700" /> {personal.portfolio.replace(/^https?:\/\/(www\.)?/, '')}
+                <Globe className="w-3.5 h-3.5 text-cyan-700" /> {personal.portfolio.replace(/^https?:\/\/(www\.)?/, '')}
               </span>
             )}
           </div>
@@ -73,10 +73,13 @@ export const TechnicalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Career Objective */}
         {objective && (
           <section>
-            <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider border-b border-zinc-300 pb-0.5 mb-1.5 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-zinc-800 rounded-full" />
-              Career Objective
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5 leading-none">
+                <span className="w-1.5 h-1.5 bg-zinc-800 rounded-full" />
+                Career Objective
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <p className="text-zinc-700 text-xs leading-relaxed text-left">
               {objective}
             </p>
@@ -86,10 +89,13 @@ export const TechnicalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Technical Summary */}
         {summary && (
           <section>
-            <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider border-b border-zinc-300 pb-0.5 mb-1.5 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-zinc-800 rounded-full" />
-              Technical Summary
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5 leading-none">
+                <span className="w-1.5 h-1.5 bg-zinc-800 rounded-full" />
+                Technical Summary
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <p className="text-zinc-700 text-xs leading-relaxed text-left">
               {summary}
             </p>
@@ -99,10 +105,13 @@ export const TechnicalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Technical Competencies Grid */}
         {skills && skills.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold text-cyan-900 uppercase tracking-wider border-b border-zinc-300 pb-0.5 mb-1.5 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-cyan-700 rounded-full" />
-              Core Competencies & Skills
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-cyan-900 uppercase tracking-wider flex items-center gap-1.5 leading-none">
+                <span className="w-1.5 h-1.5 bg-cyan-700 rounded-full" />
+                Core Competencies & Skills
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1 text-xs">
               {Object.entries(groupedSkills).map(([cat, items]) => (
                 <div key={cat} className="flex items-baseline gap-1">
@@ -114,13 +123,16 @@ export const TechnicalTemplate: React.FC<TemplateProps> = ({ data }) => {
           </section>
         )}
 
-        {/* Technical Experience */}
+        {/* Engineering Experience */}
         {experience && experience.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold text-cyan-900 uppercase tracking-wider border-b border-zinc-300 pb-0.5 mb-2 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-cyan-700 rounded-full" />
-              Engineering Experience
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-cyan-900 uppercase tracking-wider flex items-center gap-1.5 leading-none">
+                <span className="w-1.5 h-1.5 bg-cyan-700 rounded-full" />
+                Engineering Experience
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <div className="space-y-3">
               {experience.map((exp) => (
                 <div key={exp.id}>
@@ -147,10 +159,13 @@ export const TechnicalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Technical Projects */}
         {projects && projects.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold text-cyan-900 uppercase tracking-wider border-b border-zinc-300 pb-0.5 mb-2 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-cyan-700 rounded-full" />
-              Systems & Software Projects
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-cyan-900 uppercase tracking-wider flex items-center gap-1.5 leading-none">
+                <span className="w-1.5 h-1.5 bg-cyan-700 rounded-full" />
+                Systems & Software Projects
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <div className="space-y-2.5">
               {projects.map((proj) => (
                 <div key={proj.id}>
@@ -179,10 +194,13 @@ export const TechnicalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Education */}
         {education && education.length > 0 && (
           <section>
-            <h2 className="text-xs font-bold text-cyan-900 uppercase tracking-wider border-b border-zinc-300 pb-0.5 mb-2 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-cyan-700 rounded-full" />
-              Education
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-cyan-900 uppercase tracking-wider flex items-center gap-1.5 leading-none">
+                <span className="w-1.5 h-1.5 bg-cyan-700 rounded-full" />
+                Education
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <div className="space-y-2">
               {education.map((edu) => (
                 <div key={edu.id} className="flex justify-between items-baseline flex-wrap">
@@ -200,10 +218,13 @@ export const TechnicalTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Certifications & Achievements */}
         {((certifications && certifications.length > 0) || (achievements && achievements.length > 0) || (languages && languages.length > 0)) && (
           <section>
-            <h2 className="text-xs font-bold text-cyan-900 uppercase tracking-wider border-b border-zinc-300 pb-0.5 mb-1.5 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-cyan-700 rounded-full" />
-              Certifications & Highlights
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-bold text-cyan-900 uppercase tracking-wider flex items-center gap-1.5 leading-none">
+                <span className="w-1.5 h-1.5 bg-cyan-700 rounded-full" />
+                Certifications & Highlights
+              </h2>
+              <div className="h-[1px] w-full bg-zinc-300 mt-1" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-zinc-700">
               {certifications?.map((c) => (
                 <div key={c.id}>

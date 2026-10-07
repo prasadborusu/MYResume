@@ -1,7 +1,5 @@
 import React from 'react';
 import { ResumeData } from '../types/resume';
-import { Mail, Phone, MapPin, Globe } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '../components/ui/Icons';
 
 interface TemplateProps {
   data: ResumeData;
@@ -11,39 +9,39 @@ export const ExecutiveTemplate: React.FC<TemplateProps> = ({ data }) => {
   const { personal, summary, objective, education, skills, projects, experience, certifications, achievements, languages } = data;
 
   const groupedSkills = skills.reduce((acc, skill) => {
-    const cat = skill.category || 'Other Skills';
+    const cat = skill.category || 'Strategic Competencies';
     if (!acc[cat]) acc[cat] = [];
     acc[cat].push(skill.name);
     return acc;
   }, {} as Record<string, string[]>);
 
   const contactItems = [
-    personal.location,
-    personal.phone,
     personal.email,
+    personal.phone,
+    personal.location,
     personal.linkedin ? personal.linkedin.replace(/^https?:\/\/(www\.)?/, '') : '',
     personal.portfolio ? personal.portfolio.replace(/^https?:\/\/(www\.)?/, '') : '',
     personal.github ? personal.github.replace(/^https?:\/\/(www\.)?/, '') : ''
   ].filter(Boolean);
 
   return (
-    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[11.5px] min-h-[1050px]">
+    <div className="w-full bg-white text-zinc-900 font-sans p-8 md:p-10 leading-normal text-[12.5px] print:p-0 print:text-[11.5px] min-h-[1123px] box-border">
       {/* Executive Header */}
-      <header className="border-b-4 border-slate-900 pb-4 mb-5">
+      <header className="border-b-4 border-slate-900 pb-3 mb-4">
         <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-950 uppercase">
           {personal.fullName || 'Executive Leader'}
         </h1>
         {personal.jobTitle && (
-          <p className="text-sm font-bold text-slate-700 uppercase tracking-widest mt-0.5">
+          <p className="text-xs font-bold text-slate-700 uppercase tracking-widest mt-1">
             {personal.jobTitle}
           </p>
         )}
-        <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2.5 text-xs text-slate-600 font-medium">
+        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 text-xs text-slate-600 font-medium">
           {contactItems.map((item, idx) => (
-            <React.Fragment key={idx}>
-              <span>{item}</span>
-              {idx < contactItems.length - 1 && <span className="text-slate-400 font-bold">|</span>}
-            </React.Fragment>
+            <span key={idx}>
+              {item}
+              {idx < contactItems.length - 1 && <span className="ml-4 text-slate-300">|</span>}
+            </span>
           ))}
         </div>
       </header>
@@ -52,9 +50,12 @@ export const ExecutiveTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Career Objective */}
         {objective && (
           <section>
-            <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 border-b border-slate-300 pb-1 mb-1.5">
-              Career Objective
-            </h2>
+            <div className="mb-1.5">
+              <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 leading-none">
+                Career Objective
+              </h2>
+              <div className="h-[1.5px] w-full bg-slate-300 mt-1" />
+            </div>
             <p className="text-slate-800 text-xs leading-relaxed text-left">
               {objective}
             </p>
@@ -64,9 +65,12 @@ export const ExecutiveTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Executive Profile */}
         {summary && (
           <section>
-            <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 border-b border-slate-300 pb-1 mb-1.5">
-              Executive Profile
-            </h2>
+            <div className="mb-1.5">
+              <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 leading-none">
+                Executive Profile
+              </h2>
+              <div className="h-[1.5px] w-full bg-slate-300 mt-1" />
+            </div>
             <p className="text-slate-800 text-xs leading-relaxed text-left">
               {summary}
             </p>
@@ -76,9 +80,12 @@ export const ExecutiveTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Executive Experience */}
         {experience && experience.length > 0 && (
           <section>
-            <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 border-b border-slate-300 pb-1 mb-2">
-              Leadership & Professional Experience
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 leading-none">
+                Leadership & Professional Experience
+              </h2>
+              <div className="h-[1.5px] w-full bg-slate-300 mt-1" />
+            </div>
             <div className="space-y-3">
               {experience.map((exp) => (
                 <div key={exp.id}>
@@ -105,9 +112,12 @@ export const ExecutiveTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Key Projects / Strategic Initiatives */}
         {projects && projects.length > 0 && (
           <section>
-            <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 border-b border-slate-300 pb-1 mb-2">
-              Strategic Initiatives & Projects
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 leading-none">
+                Strategic Initiatives & Projects
+              </h2>
+              <div className="h-[1.5px] w-full bg-slate-300 mt-1" />
+            </div>
             <div className="space-y-2.5">
               {projects.map((proj) => (
                 <div key={proj.id}>
@@ -118,7 +128,7 @@ export const ExecutiveTemplate: React.FC<TemplateProps> = ({ data }) => {
                   {proj.description && (
                     <div className="text-slate-800 mt-0.5 text-xs whitespace-pre-line space-y-0.5">
                       {proj.description.split('\n').map((line, i) => (
-                        <p key={i} className="leading-snug">{line}</p>
+                        <p key={i} className="leading-none">{line}</p>
                       ))}
                     </div>
                   )}
@@ -131,9 +141,12 @@ export const ExecutiveTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Core Competencies & Skills */}
         {skills && skills.length > 0 && (
           <section>
-            <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 border-b border-slate-300 pb-1 mb-1.5">
-              Core Competencies & Expertise
-            </h2>
+            <div className="mb-1.5">
+              <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 leading-none">
+                Core Competencies & Expertise
+              </h2>
+              <div className="h-[1.5px] w-full bg-slate-300 mt-1" />
+            </div>
             <div className="space-y-1 text-xs text-slate-800">
               {Object.entries(groupedSkills).map(([cat, items]) => (
                 <p key={cat}>
@@ -147,9 +160,12 @@ export const ExecutiveTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Education */}
         {education && education.length > 0 && (
           <section>
-            <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 border-b border-slate-300 pb-1 mb-2">
-              Education & Professional Development
-            </h2>
+            <div className="mb-2">
+              <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 leading-none">
+                Education & Professional Development
+              </h2>
+              <div className="h-[1.5px] w-full bg-slate-300 mt-1" />
+            </div>
             <div className="space-y-2">
               {education.map((edu) => (
                 <div key={edu.id} className="flex justify-between items-baseline flex-wrap text-xs">
@@ -167,9 +183,12 @@ export const ExecutiveTemplate: React.FC<TemplateProps> = ({ data }) => {
         {/* Honors, Certifications & Languages */}
         {((certifications && certifications.length > 0) || (achievements && achievements.length > 0) || (languages && languages.length > 0)) && (
           <section>
-            <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 border-b border-slate-300 pb-1 mb-1.5">
-              Certifications & Key Recognitions
-            </h2>
+            <div className="mb-1.5">
+              <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-950 leading-snug">
+                Certifications & Key Recognitions
+              </h2>
+              <div className="h-[1.5px] w-full bg-slate-300 mt-1" />
+            </div>
             <ul className="space-y-1 text-xs text-slate-800">
               {certifications?.map((c) => (
                 <li key={c.id}>
